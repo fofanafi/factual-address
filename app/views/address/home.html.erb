@@ -1,0 +1,9 @@
+<%= form_tag("#", method: "get") do %>
+  <%= label_tag(:q, "Check address:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Lookup") %>
+<% end %>
+
+<br>
+
+<b><%= params[:q] %></b>
