@@ -4,7 +4,7 @@
   <%= label_tag(:address) %>
   <%= text_field(:address, :address) %>
   <br>
-  <%= label_tag(:address_extended, "Address Line 2 (optional)") %>
+  <%= label_tag(:address_extended, "Address Line 2") %>
   <%= text_field(:address, :address_extended) %>
   <br>
   <%= label_tag(:locality, "City") %>
@@ -20,4 +20,12 @@
 <% end %>
 
 <br>
-<%= @factual_id %>
+<% if @address_to_check %>
+  Checking for address: <br>
+  <%= @address_to_check %> <br> <br>
+  <% if @address_exists %>
+    Address exists! Factual id: <%= @factual_id %>
+  <% else %>
+    Address does not exist.
+  <% end %>
+<% end %>
