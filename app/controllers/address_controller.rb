@@ -1,13 +1,11 @@
-require 'factual'
-
 class AddressController < ApplicationController
 
   def home
-    factual = Factual.new(FACTUAL_KEY, FACTUAL_SECRET)
-    
     if params[:address]
-      @address_to_check = params[:address].reject{ |key, val| val.blank? }
-      matches = factual.table("places-us").filters(@address_to_check.to_unsafe_hash()).select("factual_id").rows
+      @address_to_check = params[:address].reject{ |key, val| val.blank? }.to_unsafe_hash().to_json
+      url = "http://api.v3.factual.com/t/places-us/match?values=" + @address_to_check + "&KEY=" + FACTUAL_KEY
+      result = Net::HTTP.get(URI.parse(url))
+      matches = JSON.parse(result)['response']['data']
       if matches and matches.length > 0
         @address_exists = true
         @factual_id = matches[0]["factual_id"]
