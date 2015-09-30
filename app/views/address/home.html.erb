@@ -1,20 +1,23 @@
 <h1>Check if an address exists</h1>
 
-<%= form_tag("#", method: "get") do %>
+<%= form_tag("#", method: "get", :'data-type' => 'json') do %>
   <%= label_tag(:address) %>
-  <%= text_field_tag(:address) %>
+  <%= text_field(:address, :address) %>
   <br>
   <%= label_tag(:address_extended, "Address Line 2 (optional)") %>
-  <%= text_field_tag(:address_extended) %>
+  <%= text_field(:address, :address_extended) %>
   <br>
   <%= label_tag(:locality, "City") %>
-  <%= text_field_tag(:locality) %>
+  <%= text_field(:address, :locality) %>
   <br>
   <%= label_tag(:region, "State") %>
-  <%= text_field_tag(:region) %>
+  <%= text_field(:address, :region) %>
   <br>
   <%= label_tag(:postcode, "Zipcode") %>
-  <%= text_field_tag(:postcode) %>
+  <%= text_field(:address, :postcode) %>
   <br>
-  <%= submit_tag("Lookup") %>
+  <%= submit_tag("Check") %>
 <% end %>
+
+<br>
+<%= @factual_id %>
